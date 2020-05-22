@@ -46,36 +46,6 @@ plot.igraph(chart222, edge.arrow.size=0.2, edge.curved=0,
             vertex.label.cex=.7, vertex.label.dist=2.5,  margin=0, vertex.size = 10)
 
 
-###
-net.bg <- sample_pa(109) 
-
-V(net.bg)$size <- 7
-
-V(net.bg)$frame.color <- "white"
-
-V(net.bg)$color <- "darkgreen"
-
-V(net.bg)$label <- ""
-
-E(net.bg)$arrow.mode <- 0
-
-list <- as.list(chart1)
-
-tr<- make_tree(109, children = 12, mode= "undirected")
-plot(tr, vertex.size=10)
-
-plot(tr, layout = l)
-
-
-####
-
-ceb <- cluster_edge_betweenness(chart2) 
-
-dendPlot(ceb, mode="hclust", cex = 0.5)
-
-###
-
-plot(ceb, chart2, cex = 0.5) 
 
 
 

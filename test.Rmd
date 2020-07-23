@@ -1,0 +1,109 @@
+---
+title: "Metadata on Carbon Footprints"
+author: "Migliari, W. (2020)"
+output:
+  rmarkdown::html_document:
+    theme: lumen
+bibliography: testcf.bib
+
+---
+\
+\
+```{r, echo=FALSE, message=FALSE, comment=FALSE}
+
+library(readxl)
+library(plotly)
+library(tidyr)
+library(readxl)
+library(ggplot2)
+library(DT)
+library(kableExtra)
+
+```
+
+```{r, echo=FALSE, warning=FALSE, comment = FALSE, message = FALSE}
+
+options(digits = 3)
+carbon <- read_excel("/Users/wemigliari/Documents/R/tabelas/carbon_emissions.xlsx", 
+                     col_types = c("text", "text", "text", 
+                                   "text", "numeric", "numeric", "numeric", 
+                                   "numeric", "numeric", "numeric", 
+                                   "numeric", "numeric", "numeric", 
+                                   "numeric"))
+
+carbon[,2:4] <- NULL
+```
+
+## {.tabset}
+
+### Analytics 
+
+```{r, echo = FALSE, warning=FALSE, comment=FALSE, message=FALSE, fig.height = 6, fig.width = 9, fig.align = "center"}
+
+plot_ly(carbon, x = ~`Country Name`, y = carbon$`2007`, color = I("#071317"), name = "2007", type = "scatter", mode = "markers")%>%
+  add_trace(x = ~`Country Name`, y = carbon$`2008`, color = I("#194553"), name = "2008")%>%
+  add_trace(x = ~`Country Name`, y = carbon$`2009`, color = I("#2c778f"), name = "2009")%>%
+  add_trace(x = ~`Country Name`, y = carbon$`2010`, color = I("#44a6c6"), name = "2010")%>%
+  add_trace(x = ~`Country Name`, y = carbon$`2011`, color = I("#71bbd4"), name = "2011")%>%
+  add_trace(x = ~`Country Name`, y = carbon$`2012`, color = I("#bcdfeb"), name = "2012")%>%
+  add_trace(x = ~`Country Name`, y = carbon$`2013`, color = I("#c6cbcd"), name = "2013")%>%
+  add_trace(x = ~`Country Name`, y = carbon$`2014`, color = I("darkgray"), name = "2014")%>%
+  add_trace(x = ~`Country Name`, y = carbon$`2015`, color = I("green"), name = "2015")%>%
+  add_trace(x = ~`Country Name`, y = carbon$`2016`, color = I("yellow"), name = "2016")%>%
+  layout(margin = list(b=10, l=10),
+         xaxis = list(tickangle=90, title = "", tickfont = list(size = 7), titlefont=list(size=7)),
+         yaxis = list(title = "", titlefont=list(size=7)))
+
+
+```
+
+\
+\
+
+```{r generateBibliography, results="asis", echo=FALSE, warning=FALSE, message = FALSE}
+
+require("knitcitations")
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "testcf.bib")
+
+``` 
+\
+```
+BibTeX Reference
+
+@misc{adjusted_net_savings,
+	Author = {{World Bank}},
+	Date-Added = {2020-07-23 09:56:56 +0200},
+	Date-Modified = {2020-07-23 13:04:41 +0200},
+	Howpublished = {https://www.worldbank.org/ ${\rightarrow}$ Data ${\rightarrow}$ {By Indicator} ${\rightarrow}$ {Economy and Growth}, {Adjusted Net Savings} {(accessed 20 June 2020)}},
+	Keywords = {World Bank},
+	Lastchecked = {{accessed on 20 June 2020}},
+	Title = {{Adjusted Net Savings}},
+	Year = {2016},
+	Bdsk-Url-1 = {https://databank.worldbank.org/source/adjusted-net-savings/Type/TABLE/preview/on#}}
+
+```
+\
+\
+\
+
+### Data & Table
+
+
+```{r, echo = FALSE, message = FALSE}
+
+datatable(carbon, filter = 'top',
+          extensions = 'Buttons',
+          options = list(
+            columnDefs = list(list(width = '10px', targets = "_all")),
+  pageLength = 15,
+  dom = 'Bfrtip', 
+  buttons = c('copy', 'excel', 'excel')))%>%
+    formatRound(2:12, digits=1)%>%
+  formatStyle(columns = c(1:11), fontSize = '80%')
+
+```
+
+
+

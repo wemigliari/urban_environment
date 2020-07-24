@@ -51,7 +51,7 @@ plot_ly(carbon, x = ~`Country Name`, y = carbon$`2007`, color = I("#071317"), na
   add_trace(x = ~`Country Name`, y = carbon$`2015`, color = I("green"), name = "2015")%>%
   add_trace(x = ~`Country Name`, y = carbon$`2016`, color = I("yellow"), name = "2016")%>%
   layout(margin = list(b=10, l=10),
-         xaxis = list(tickangle=90, title = "", tickfont = list(size = 7), titlefont=list(size=7)),
+         xaxis = list(tickangle=35, title = "Carbon Footprints. Adjusted Net Savings (2007-2016).", tickfont = list(size = 7), titlefont=list(size=7)),
          yaxis = list(title = "", titlefont=list(size=7)))
 
 
@@ -95,6 +95,8 @@ BibTeX Reference
 
 datatable(carbon, filter = 'top',
           extensions = 'Buttons',
+          callback = DT::JS("return table;"),
+          caption = 'Table 1: Carbon Footprints. Adjusted Net Savings (2007-2016).',
           options = list(
             columnDefs = list(list(width = '10px', targets = "_all")),
   pageLength = 15,

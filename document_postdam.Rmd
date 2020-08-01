@@ -1,0 +1,34 @@
+---
+title: \vspace{2.5in} Metadata on Sustainability Studies
+subtitle: Glossary and Hyperlinks
+output: 
+  pdf_document
+header-includes:
+  - \usepackage{bbm}
+  - \usepackage{titling}
+  - \pretitle{\begin{center}\LARGE\includegraphics[width=10cm]{icon.png}\\[\bigskipamount]}
+  - \posttitle{\end{center}}
+  - \usepackage{fancyhdr}
+  - \pagenumbering{gobble}
+toc: yes
+toc_depth: 3
+---
+
+\newpage
+\pagenumbering{arabic}
+
+
+# Introduction
+
+## Briefs Notes on Glossary
+
+## Briefs Notes on Hyperlinks
+
+## How to use this handbook?
+
+# A-Z
+
+This handbook is a glossary on sustainability studies published by the Potsdam Institute for Advanced Sustainability Studies.
+
+
+

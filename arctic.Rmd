@@ -57,7 +57,8 @@ Cordula Granderath, Project Assistant\
 Duration:\
 12/2016 to 09/2021\
 \
-For more details, [click here](https://www.iass-potsdam.de/en/research/arctic-impact-weather-and-climate-blue-action)
+For more details,<a href="https://www.iass-potsdam.de/en/research/arctic-impact-weather-and-climate-blue-action" target="_blank"> click here.</a>
+
 \
 \
 
@@ -80,7 +81,7 @@ set.seed(50)
 plot_ly(arctic_table1, x = ~`time`, y = ~`total`, 
         name = "2007", type = "bar", mode = "markers",
         marker = list(size = ~total/3000, opacity = 0.5))%>%
-  layout(title = "Figure 1. Natural Gas Extraction (thousands tonnes), 2013-2016, Russian Federation", margin = list(b=10, l=10),
+  layout(title = "Figure 1. Natural Gas Extraction (in thousand tonnes), 2013-2016, Russian Federation", margin = list(b=10, l=10),
          xaxis = list(tickangle=35, title = "Ministry of Energy of Russian Federation", tickfont = list(size = 7), titlefont=list(size=7),
                       type = "date",
                       range=c('2012-12-01', '2016-01-31')),
@@ -118,32 +119,13 @@ plot_ly(carbon, x = ~`Country Name`, y = carbon$`2007`, color = I("#071317"), na
 \
 
 ### Tables
-\
-```{r, echo = FALSE, message = FALSE}
 
-
-
-datatable(carbon, filter = 'top',
-          extensions = 'Buttons',
-          callback = DT::JS("return table;"),
-          caption = 'Table 1: Carbon Footprints. Adjusted Net Savings (2007-2016), World Bank.',
-          options = list(scrollX = T,
-            columnDefs = list(list(width = '10px', targets = "_all")),
-  pageLength = 10,
-  dom = 'Bfrtip', 
-  buttons = c('copy', 'csv', 'excel')))%>%
-    formatRound(2:12, digits=1)%>%
-  formatStyle(columns = c(1:11), fontSize = '80%')
-
-```
-\
-\
 ```{r, echo = FALSE, message = FALSE}
 
 datatable(arctic_table1, filter = 'top',
           extensions = 'Buttons',
           callback = DT::JS("return table;"),
-          caption = 'Table 2: Gas Production in Thousands Tonnes (2013-2016), Ministry of Energy of the Russian Federation.',
+          caption = 'Table 1: Gas Production in Thousand Tonnes (2013-2016), Ministry of Energy of the Russian Federation.',
           options = list(
             columnDefs = list(list(width = '10px', targets = "_all")),
   pageLength = 10,
@@ -153,6 +135,29 @@ datatable(arctic_table1, filter = 'top',
   formatStyle(columns = c(1:3), fontSize = '80%')
 
 ```
+
+\
+\
+
+```{r, echo = FALSE, message = FALSE}
+
+
+
+datatable(carbon, filter = 'top',
+          extensions = 'Buttons',
+          callback = DT::JS("return table;"),
+          caption = 'Table 2: Carbon Footprints. Adjusted Net Savings (2007-2016), World Bank.',
+          options = list(scrollX = T,
+            columnDefs = list(list(width = '10px', targets = "_all")),
+  pageLength = 10,
+  dom = 'Bfrtip', 
+  buttons = c('copy', 'csv', 'excel')))%>%
+    formatRound(2:12, digits=1)%>%
+  formatStyle(columns = c(1:11), fontSize = '80%')
+
+```
+
+\
 
 ### References
 \

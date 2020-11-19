@@ -1,0 +1,192 @@
+---
+title: ""
+author: ""
+output:
+  rmarkdown::html_document:
+    theme: lumen
+---
+\
+<img src="iconpolos2.png" alt="" width="350" height="160">
+<img src="iconpolos.png" alt="" width="350" height="60">
+\
+
+## Metadata & Facts on Territorial Conflicts [This is not an official webpage! Working in progress.]
+
+#### Assessment Research and Diagnosis Macacos, Minas Gerais, Brazil, 2020.
+
+\
+
+
+```{r, echo = FALSE, message = FALSE, comment = FALSE, warning = FALSE}
+library(readxl)
+library(plotly)
+library(dplyr)
+library(knitr)
+
+macacos <- read_excel("/Users/wemigliari/Documents/R/tabelas/macacos.xlsx", sheet = "gen")
+macacos <- data.frame(macacos)
+
+macacos1 <- read_excel("/Users/wemigliari/Documents/R/tabelas/macacos.xlsx", sheet = "rac")
+macacos1 <- data.frame(macacos1)
+
+macacos2 <- read_excel("/Users/wemigliari/Documents/R/tabelas/macacos.xlsx", sheet = "orig")
+macacos2 <- data.frame(macacos2)
+
+macacos3 <- read_excel("/Users/wemigliari/Documents/R/tabelas/macacos.xlsx", sheet = "aces")
+macacos3 <- data.frame(macacos3)
+
+macacos4 <- read_excel("/Users/wemigliari/Documents/R/tabelas/macacos.xlsx", sheet = "dificuldade")
+macacos4 <- data.frame(macacos4)
+
+```
+
+
+\
+
+
+## {.tabset}
+
+### Gender & Colour
+
+\
+
+```{r, echo = FALSE, message = FALSE, comment = FALSE, warning = FALSE}
+
+### Cirkeldiagrammer
+
+colors <- c('#8B4513', '#D2691E')
+colors1 <- c('#A52A2A', '#D2691E', '#8B4513', '#DAA520', '#F4A460', '#DEB887')
+
+plot_ly() %>% add_pie(data = macacos, 
+                      labels = macacos$gene, 
+                      values = macacos$total,
+                      type = "pie",
+                      name = "Gender", 
+                      hole = 0.6,
+                      marker = list(colors = colors),
+                      domain = list(x = c(0, 0.4), y = c(0, 1))) %>%
+              add_pie(data = macacos1,
+                      labels = macacos1$cor,
+                      values = macacos1$total,
+                      type = "pie", 
+                      name = "Race",
+                      hole = 0.6,
+                      marker = list(colors = colors1),
+                      domain = list(x = c(0.6, 1), y = c(0, 1))) %>%
+              layout(autosize = F, title = "",  showlegend = TRUE,
+                      xaxis = list(showgrid = FALSE, zeroline = FALSE,
+                      showticklabels = FALSE),
+                      yaxis = list(showgrid = FALSE, zeroline = FALSE,
+                      showticklabels = FALSE))
+  
+
+
+```
+
+
+### Affected Communities
+
+\
+
+```{r, echo = FALSE, message = FALSE, comment = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
+
+colors2 <- c('#D2691E')
+
+fig2 <- plot_ly(data = macacos2, x = macacos2$Total, 
+              y = ~reorder(macacos2$Bairro, macacos2$Total), 
+              text = paste(macacos2$Average, '%'),
+              labels = c(macacos2$Total, macacos2$Bairro),
+              name = "Neighbourhood",
+              type = 'bar', orientation = 'h',
+              marker = list(color = colors2,
+              line = list(color = colors2, width = 1))) %>%
+  
+       layout(yaxis = list(showgrid = FALSE, showline = FALSE, 
+              showticklabels = TRUE,
+              domain= c(0, 0.85)),
+              xaxis = list(zeroline = FALSE, showline = FALSE, 
+              showticklabels = TRUE,
+              showgrid = TRUE), legend = F) 
+
+colors3 <- c('#A52A2A', '#D2691E', '#8B4513') 
+             
+fig3 <- plot_ly(data = macacos3, x = macacos3$Total, y = ~reorder(macacos3$Total, macacos3$Status), 
+              hoverinfo = "text",
+              text = paste(macacos3$Status, macacos3$Average, '%'),
+              name = "Registration",
+              type = 'scatter', mode = 'lines+markers',
+              line = list(color = '#D2691E')) 
+
+fig3 <- fig3 %>% layout(yaxis = list(showgrid = FALSE, 
+                       showline = TRUE, showticklabels = FALSE,
+                       linecolor = colors3, linewidth = 2,
+                       domain = c(0, 0.85)),
+                       xaxis = list(zeroline = FALSE, showline = FALSE,
+                       showticklabels = TRUE, showgrid = TRUE,
+                       side = 'top', dtick = 1000)) 
+
+fig3 <- fig3 %>% add_annotations(x = macacos3$Total, y = macacos3$Status,
+                       xref = 'x2', yref = 'y2',
+                       text = paste('', ''),
+                       font = list(family = 'Arial', size = 12, color = colors3),
+                       showarrow = FALSE)
+
+fig <- subplot(fig2, fig3)
+
+
+fig <- fig %>% layout(title = 'Affected People by Neighbourhood and Register Status',
+         legend = list(x = 0.029, y = 1.038,
+         font = list(size = 10)),
+         margin = list(l = 120, r = 10, t = 140, b = 80),
+         paper_bgcolor = '#FFF8DC',
+         plot_bgcolor = '#FFF8DC')
+fig <- fig %>% add_annotations(xref = 'paper', yref = 'paper',
+                  x = 0.2, y = -0.15,
+                  text = paste('Data published by the Polos de Cidadania Programme, Federal University of Minas Gerais, Brazil.'),
+                  font = list(family = 'Arial', size = 8, color = '#D2691E'),
+                  showarrow = FALSE)
+
+fig
+
+```
+\
+
+### Registration
+
+\
+Questionnaires answered by the affected people separated into three categories: Answered, Not Answered and Partially Answered. 
+\
+\
+```{r, echo = FALSE, message = FALSE, comment = FALSE, warning = FALSE, fig.align='center'}
+
+### Cirkeldiagrammer
+
+colors4 <- c('#A52A2A', '#D2691E', '#8B4513', '#DAA520')
+
+plot_ly() %>% add_pie(data = macacos4, 
+                      labels = macacos4$answer, 
+                      values = macacos4$total,
+                      type = "pie",
+                      name = "Questionnaires", 
+                      hole = 0.6,
+                      marker = list(colors = colors4),
+                      domain = list(x = c(0, 0.4), y = c(0, 1))) %>%
+              layout(autosize = F, title = "",  showlegend = TRUE,
+                      xaxis = list(showgrid = FALSE, zeroline = FALSE,
+                      showticklabels = FALSE),
+                      yaxis = list(showgrid = FALSE, zeroline = FALSE,
+                      showticklabels = FALSE))
+  
+
+
+```
+
+**Source**
+<a href="https://polosdecidadania.com.br/biblioteca/pesquisa-diagnostica-avaliativa-macacos-mg-2020/" target="_blank"> Polos de Cidadania Programme </a> 
+
+
+\
+
+\
+\
+\

@@ -1,0 +1,106 @@
+---
+title: ""
+author: ""
+output:
+  rmarkdown::html_document:
+    theme: lumen
+
+---
+\
+\
+<img src="iconpolos2.png" alt="" width="350" height="160">
+<img src="iconpolos.png" alt="" width="350" height="60">
+
+```{r echo = FALSE, include=FALSE, warning = FALSE, comment=FALSE, message=FALSE}
+library(curl)
+library(rsconnect)
+library(readxl)
+library(leaflet)
+library(leaflet.extras)
+library(sp)
+library(plotly)
+library(maps)
+library(mapdata)
+library(mapproj)
+library(leaflet)
+library(sf)
+library(tmap)
+library(transformr)
+library(geojson)
+library(rgdal)
+library(raster) # union function
+library(bookdown)
+data("World")
+
+
+brazil <- readOGR("/Users/wemigliari/Documents/R/data/BRA_adm2.shp")
+
+
+```
+
+#### Metadata on Environmental Impact Caused by Mining Activities [This is not an official webpage!]
+
+\
+The following map is a geoprocessing interface that maps the mining activities in the State of Minas Gerais, Metropolitan Region of Belo Horizonte, Brazil. Please, click on the markers to see the respective contents. In the pop-ups you will find also other hyperlinks that will direct you to specific webpages with more data, graphs and fact sheets about specific case studies realised by the Polos de Cidadania Programme, Federal University of Minas Gerais (UFMG), Brazil. Click on the links to see in English the
+```{r, echo = FALSE}
+
+xfun::embed_file('/Users/wemigliari/Documents/R/R_Scripts/Rmarkdown/macacos.pdf', text = 'Qualitative Metadata')
+
+```
+ and the <a href='https://rpubs.com/wemigliari/polos' target='_blank'> Quantitative Metadata </a>.
+\
+
+```{r, echo = FALSE, warning=FALSE, comment=FALSE, message=FALSE, fig.height = 6, fig.width = 9.5, fig.align = "center", include = TRUE}
+
+content1 <- paste(sep ="<br>", "<a href='https://rpubs.com/wemigliari/polos', target='_blank'> Metadata on Macacos' Case Study </a>",
+                 "Pasárgada",
+                 "Affected People: 44",
+                 "Administrative center: Nova Lima", 
+                 "Metropolitan Region: Belo Horizonte",
+                 "Ethnic Groups: Black, Pardo, White, Indigenous, Others",
+                 "Vulnerable Caused by Mining Activity: Yes",
+                 "Mining Companies: Vale/S.A",
+                 "Mine: Mina de Mar Azul")
+
+content2 <- paste(sep ="<br>", "<a href='https://rpubs.com/wemigliari/polos', target='_blank'> Metadata on Macacos' Case Study </a>",
+                 "Macacos",
+                 "Affected People: 20",
+                 "Administrative center: Nova Lima", 
+                 "Metropolitan Region: Belo Horizonte",
+                 "Ethnic Groups: Black, Pardo, White, Indigenous, Others",
+                 "Vulnerable Caused by Mining Activity: Yes",
+                 "Mining Companies: Vale/S.A",
+                 "Mine: Mina de Mar Azul")
+
+
+content3 <- paste(sep ="<br>", "<a href='https://rpubs.com/wemigliari/polos', target='_blank'> Metadata on Macacos' Case Study </a>",
+                 "Capela Velha",
+                 "Affected People: 72",
+                 "Administrative center: Nova Lima", 
+                 "Metropolitan Region: Belo Horizonte",
+                 "Ethnic Groups: Black, Pardo, White, Indigenous, Others",
+                 "Vulnerable Caused by Mining Activity: Yes",
+                 "Mining Companies: Vale/S.A",
+                 "Mine: Mina de Mar Azul")
+
+leaflet(brazil)%>% #Add the file test with the shape files russia and brazil
+  #addPolygons(fillColor = "lightblue", color = "gray",
+              #opacity = 1.0, weight = .6, smoothFactor = 0.5,
+              #highlightOptions = highlightOptions(color="white", weight=2, bringToFront = TRUE), label= test$NAME_1)%>%
+  addProviderTiles(providers$CartoDB.Positron)%>%
+  addCircles(lat=-20.070318, lng=-43.939247, color = "red", radius = 250)%>%
+  addMarkers(lat=-20.070318, lng=-43.939247, popup = content1, icon = list(iconUrl = '/Users/wemigliari/Documents/R/R_Scripts/Rmarkdown/village.png', iconSize = c(25, 25)))%>%
+  addCircles(lat=-20.042998, lng=-43.916308, color = "red",  label = lapply(content2, htmltools::HTML), radius = 250)%>%
+  addMarkers(lat=-20.042998, lng=-43.916308, popup = content2, icon = list(iconUrl = '/Users/wemigliari/Documents/R/R_Scripts/Rmarkdown/village.png', iconSize = c(25, 25)))%>%
+  addCircles(lat=-20.038238, lng=-43.917172, color = "red",  label = lapply(content3, htmltools::HTML), radius = 250)%>%
+  addMarkers(lat=-20.038238, lng=-43.917172, popup = content3, icon = list(iconUrl = '/Users/wemigliari/Documents/R/R_Scripts/Rmarkdown/village.png', iconSize = c(25, 25)))%>%
+  addMarkers(lat=-20.044801, lng=-43.957048, label = "Vale S/A, Mina de Mar Azul",icon = list(iconUrl = '/Users/wemigliari/Documents/R/R_Scripts/Rmarkdown/pickaxe.png', iconSize = c(25, 25)))%>%
+  setView(lat=-20.070318, lng = -43.939247, zoom = 13.2)
+
+```
+\
+Metadata elaborated by Wellington Migliari under the supervision of the Dr. André Luiz Freitas Dias, Polos de Cidadania Programme, Faculty of Law, Federal University of Minas Gerais, Brazil. 
+\
+\
+
+

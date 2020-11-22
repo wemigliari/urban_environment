@@ -7,13 +7,14 @@ output:
 ---
 \
 <img src="iconpolos2.png" alt="" width="350" height="160">
-<img src="iconpolos.png" alt="" width="350" height="60">
+<img src="iconpolos.png" alt="" width="350" height="50">
 \
 
 ## Metadata & Facts on Territorial Conflicts [This is not an official webpage! Working in progress.]
 
 #### Assessment Research and Diagnosis Macacos, Minas Gerais, Brazil, 2020.
-
+\
+292 Questionnaires were applied by the researchers of the Polos de Cidadania Programme, Faculty of Law, Federal University of Minas Gerais, Brazil, between 22 and 26 August 2020. Three folders were created to facilitate the visualization in English of the data collated in the report, that is to say, gender and colour, affected communities and registration status of the vulnerable individuals.
 \
 
 
@@ -49,6 +50,7 @@ macacos4 <- data.frame(macacos4)
 ### Gender & Colour
 
 \
+\
 
 ```{r, echo = FALSE, message = FALSE, comment = FALSE, warning = FALSE}
 
@@ -73,20 +75,20 @@ plot_ly() %>% add_pie(data = macacos,
                       hole = 0.6,
                       marker = list(colors = colors1),
                       domain = list(x = c(0.6, 1), y = c(0, 1))) %>%
-              layout(autosize = F, title = "",  showlegend = TRUE,
+              layout(title = "Figure 1. 292 Questionnaires Quantified by Gender and Colour",                         
+                      color = "darkgray" , autosize = F,
+                      font = list(family = 'Arial', size = 10),
+                      showlegend = TRUE,
                       xaxis = list(showgrid = FALSE, zeroline = FALSE,
                       showticklabels = FALSE),
                       yaxis = list(showgrid = FALSE, zeroline = FALSE,
                       showticklabels = FALSE))
-  
-
 
 ```
-
+**Source:**
+<a href="https://polosdecidadania.com.br/biblioteca/pesquisa-diagnostica-avaliativa-macacos-mg-2020/" target="_blank"> Polos de Cidadania Programme </a> 
 
 ### Affected Communities
-
-\
 
 ```{r, echo = FALSE, message = FALSE, comment = FALSE, warning = FALSE, fig.width = 8, fig.height = 6}
 
@@ -134,12 +136,14 @@ fig3 <- fig3 %>% add_annotations(x = macacos3$Total, y = macacos3$Status,
 fig <- subplot(fig2, fig3)
 
 
-fig <- fig %>% layout(title = 'Affected People by Neighbourhood and Register Status',
-         legend = list(x = 0.029, y = 1.038,
-         font = list(size = 10)),
+fig <- fig %>% layout(title = 'Figure 2. 292 Questionnaires Quantified by Neighbourhood and Register Status',
+         legend = list(x = 0.029, y = 1.038),
+         color = "darkgray" , autosize = F,
+         font = list(family = 'Arial', size = 10),
          margin = list(l = 120, r = 10, t = 140, b = 80),
          paper_bgcolor = '#FFF8DC',
          plot_bgcolor = '#FFF8DC')
+         
 fig <- fig %>% add_annotations(xref = 'paper', yref = 'paper',
                   x = 0.2, y = -0.15,
                   text = paste('Data published by the Polos de Cidadania Programme, Federal University of Minas Gerais, Brazil.'),
@@ -149,14 +153,15 @@ fig <- fig %>% add_annotations(xref = 'paper', yref = 'paper',
 fig
 
 ```
+**Source:**
+<a href="https://polosdecidadania.com.br/biblioteca/pesquisa-diagnostica-avaliativa-macacos-mg-2020/" target="_blank"> Polos de Cidadania Programme </a> 
+
 \
 
 ### Registration
 
 \
-Questionnaires answered by the affected people separated into three categories: Answered, Not Answered and Partially Answered. 
-\
-\
+
 ```{r, echo = FALSE, message = FALSE, comment = FALSE, warning = FALSE, fig.align='center'}
 
 ### Cirkeldiagrammer
@@ -171,17 +176,18 @@ plot_ly() %>% add_pie(data = macacos4,
                       hole = 0.6,
                       marker = list(colors = colors4),
                       domain = list(x = c(0, 0.4), y = c(0, 1))) %>%
-              layout(autosize = F, title = "",  showlegend = TRUE,
+              layout(autosize = F, title = "Figure 3. 292 Questionnaires Quantified by Register",  
+                      color = "darkgray" , autosize = F,
+                      font = list(family = 'Arial', size = 10),
+                      showlegend = TRUE,
                       xaxis = list(showgrid = FALSE, zeroline = FALSE,
                       showticklabels = FALSE),
                       yaxis = list(showgrid = FALSE, zeroline = FALSE,
                       showticklabels = FALSE))
-  
-
 
 ```
 
-**Source**
+**Source:**
 <a href="https://polosdecidadania.com.br/biblioteca/pesquisa-diagnostica-avaliativa-macacos-mg-2020/" target="_blank"> Polos de Cidadania Programme </a> 
 
 

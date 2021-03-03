@@ -97,26 +97,3 @@ text(2005-01-01, 1.0,  "Emissions Trade System",
 
 # Description: Commodity Food Price Index, 2005 = 100, includes Cereal, 
 ## Vegetable Oils, Meat, Seafood, Sugar, Bananas, and Oranges Price Indices
-
-
-lines(data_bf$year, data_bf$SHAF...10, type = "b", bty = "l", pch=9, col = "steelblue", cex = 0.5)
-lines(data_bf$year, data_bf$BOAS...11, type = "b", bty = "l", pch=10, col = "darkgray", cex = 0.5)
-lines(data_bf$year, data_bf$TEAS...12, type = "b", bty = "l", pch=11, col = "lightblue", cex = 0.5)
-lines(data_bf$year, data_bf$SEAS...13, type = "b", bty = "l", pch=12, col = "darkgreen", cex = 0.5)
-lines(data_bf$year, data_bf$EQAS...14, type = "b", bty = "l", pch=13, col = "darkgray", cex = 0.5)
-lines(data_bf$year, data_bf$AUST...15, type = "b", bty = "l", pch=14, col = "lightblue", cex = 0.5)
-lines(data_bf$year, data_bf$Global...16, type = "b", bty = "l", pch=15, col = "darkgreen", cex = 0.5)
-
-legend("topright", legend = c("Iron", "Aluminium", "Copper", "Lead", "Coal Colombia",
-                              "Coal South Africa", "Crude Oil", "NHAF", "SHAF", "BOAS",
-                              "TEAS", "SEAS", "EQAS", "AUST", "Global"),
-       col = c("blue", "gray", "darkgreen", "gold", "darkgray", "lightblue",
-               "gray", "orange ", "steelblue", "darkgray", "lightblue", "darkgreen",
-               "gray", "yellow", "darkgreen"), 
-       pch = c(1:15),
-       bty = "n", cex = 0.7)
-
-#abline(v=c(9,11), col= "gray")
-#abline(v=c(21,23), col="gray")
-abline(v=c(33,35), col="gray")
-#abline(v=c(45,47), col="gray")

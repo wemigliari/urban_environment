@@ -6,8 +6,8 @@ output:
     theme: lumen
 ---
 \
-<img src="iconpolos2.png" alt="" width="350" height="160">
-<img src="iconpolos.png" alt="" width="350" height="50">
+<img src="iconpolos.png" alt="" width="280" height="110">
+<img src="iconpolos2.png" alt="" width="340" height="70">
 \
 
 ## Metadata & Facts on Territorial Conflicts [This is not an official webpage! Work in progress.]

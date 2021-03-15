@@ -3,6 +3,7 @@ library(dplyr)
 library(varhandle)
 library(yarrr)
 library(XLConnect)
+library(plotly)
 
 
 commodities <- read_excel("/Users/wemigliari/Documents/R/data/commodities_price.xlsx",
@@ -116,3 +117,4 @@ text(x=as.numeric(commodities$Month[202]),y = 5, lty = 2, lwd=1, col='#ff7f7f', 
 
 # Description: Commodity Food Price Index, 2005 = 100, includes Cereal, 
 ## Vegetable Oils, Meat, Seafood, Sugar, Bananas, and Oranges Price Indices
+
